@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second-app
+  template:
+    metadata:
+      labels:
+        app: second-app
+    spec:
+      containers:
+      - name: second-node-dep
+        image: psycode99/kub-first-app:2
+        livenessProbe: 
+          httpGet:
+            path: /
+            port: 8080
+          periodSeconds: 3
+          initialDelaySeconds: 3  
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        # ports:
+        # - containerPort: <Port>
