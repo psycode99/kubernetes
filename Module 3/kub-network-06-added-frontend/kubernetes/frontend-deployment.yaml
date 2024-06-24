@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend-container
+        image: psycode99/kub-net-frontend
+        # env:
+        # - name: TASK_ADDR
+        #   value: "tasks-service.default"
+        ports:
+        - containerPort: 80

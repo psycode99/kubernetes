@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-api
+  template:
+    metadata:
+      labels:
+        app: users-api
+    spec:
+      containers:
+      - name: users-container
+        image: psycode99/kub-net-users:latest
+        env: 
+        - name: AUTH_ADDR
+          # value: "10.110.141.97"
+          value: "auth-service.default"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+      
